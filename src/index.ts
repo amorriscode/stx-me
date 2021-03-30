@@ -1,6 +1,6 @@
 import { AppConfig, UserSession, showConnect } from '@stacks/connect';
 
-export default function init(walletAddress: string) {
+export function init(walletAddress: string) {
   const appConfig = new AppConfig(['store_write', 'publish_data']);
   const userSession = new UserSession({ appConfig });
 
