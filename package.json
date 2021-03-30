@@ -1,19 +1,57 @@
 {
+  "version": "0.1.0",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "engines": {
+    "node": ">=10"
+  },
+  "scripts": {
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "test": "tsdx test",
+    "lint": "tsdx lint",
+    "prepare": "tsdx build",
+    "size": "size-limit",
+    "analyze": "size-limit --why"
+  },
+  "peerDependencies": {},
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint"
+    }
+  },
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
   "name": "stx-me",
-  "version": "0.0.1",
-  "description": "A hassle-free way to accept STX from any website.",
-  "main": "src/index.ts",
   "repository": "git@github.com:amorriscode/stx-me.git",
   "author": "Anthony Morris <amorriscode@gmail.com>",
-  "license": "MIT",
-  "scripts": {
-    "build": "esbuild src/index.ts --bundle --outfile=build/stx-me.js",
-    "lint": "eslint src/*.ts"
-  },
+  "description": "A hassle-free way to accept STX from any website.",
+  "module": "dist/stx-me.esm.js",
+  "size-limit": [
+    {
+      "path": "dist/stx-me.cjs.production.min.js",
+      "limit": "10 KB"
+    },
+    {
+      "path": "dist/stx-me.esm.js",
+      "limit": "10 KB"
+    }
+  ],
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^4.19.0",
-    "esbuild": "^0.9.6",
-    "eslint": "^7.22.0",
+    "@size-limit/preset-small-lib": "^4.10.2",
+    "husky": "^6.0.0",
+    "size-limit": "^4.10.2",
+    "tsdx": "^0.14.1",
+    "tslib": "^2.1.0",
     "typescript": "^4.2.3"
   },
   "dependencies": {
