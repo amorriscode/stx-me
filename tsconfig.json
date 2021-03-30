@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "noImplicitAny": true,
+    "baseUrl": "./src",
+    "outDir": "./dist",
+    "noEmit": true,
+    "sourceMap": true,
+    "strict": true,
+    "noImplicitReturns": true,
+    "moduleResolution": "node"
+  },
+  "include": ["src/**/*"]
+}
