@@ -11,7 +11,7 @@
   },
   "scripts": {
     "build": "NODE_ENV=production webpack --mode=production",
-    "start": "tsdx watch",
+    "start": "NODE_ENV=dev webpack --mode=development --watch",
     "test": "tsdx test",
     "lint": "tsdx lint"
   },
@@ -32,7 +32,7 @@
   "author": "Anthony Morris <amorriscode@gmail.com>",
   "description": "A hassle-free way to accept STX from any website.",
   "devDependencies": {
-    "buffer": "^6.0.3",
+    "buffer": "5.6.0",
     "crypto-browserify": "^3.12.0",
     "esbuild-loader": "^2.11.0",
     "husky": "^6.0.0",

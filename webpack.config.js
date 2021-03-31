@@ -7,12 +7,12 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
     library: {
-      name: 'stxMe',
+      name: 'stx',
       type: 'var',
     },
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
+    extensions: ['.ts', '.js'],
   },
   module: {
     rules: [
@@ -20,7 +20,7 @@ module.exports = {
         test: /\.ts?$/,
         loader: 'esbuild-loader',
         options: {
-          loader: 'ts', // Or 'ts' if you don't need tsx
+          loader: 'ts',
           target: 'es2015',
         },
       },
