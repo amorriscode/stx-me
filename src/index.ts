@@ -18,6 +18,7 @@ let donationAddress: string | null = null;
 let config: Config = {
   showAddress: true,
   appDetails: { name: 'STX Me', icon: '' },
+  buttonText: 'Send Me STX',
   successMessage: 'Thanks for your donation!',
 };
 
@@ -127,6 +128,7 @@ function injectDonateInput() {
 
   const signTransactionButton = document.createElement('button');
   signTransactionButton.classList.add('stx-me__button');
+  signTransactionButton.classList.add('donate');
   signTransactionButton.innerHTML = 'Donate';
 
   stxMeContainer.appendChild(donationAmountInput);
@@ -145,7 +147,7 @@ function injectDonateButton() {
 
   const donateButton = document.createElement('button');
   donateButton.classList.add('stx-me__button');
-  donateButton.innerHTML = 'STX Me';
+  donateButton.innerHTML = config.buttonText;
 
   stxMeContainer.appendChild(donateButton);
   donateButton.addEventListener('click', injectDonateInput);

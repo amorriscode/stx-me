@@ -1,0 +1,57 @@
+#stx-me * {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+#stx-me {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  max-width: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  --brand-color: #5546ff;
+}
+
+#stx-me input.stx-me__input {
+  width: 100%;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 14px;
+  margin: 0 auto -4px;
+  font-size: 16px;
+}
+
+#stx-me button.stx-me__button {
+  display: flex;
+  justify-content: center;
+  border-radius: 8px;
+  background-color: var(--brand-color);
+  color: #fff;
+  border: 0;
+  padding: 14px 24px;
+  font-size: 18px;
+  width: 100%;
+}
+
+#stx-me button.stx-me__button:hover {
+  opacity: 75%;
+  cursor: pointer;
+}
+
+#stx-me button.stx-me__button.donate {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+#stx-me .stx-me__transaction-link {
+  font-size: 12px;
+  margin-top: 10px;
+  color: var(--brand-color);
+}
+
+#stx-me .stx-me__transaction-link:hover {
+  opacity: 75%;
+}
