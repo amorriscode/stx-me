@@ -1,30 +1,22 @@
-import { AppConfig, UserSession } from '@stacks/connect';
-
-import { Config, ConfigOptions } from './types';
-import { mergeConfig } from './utils/config';
+import { ConfigOptions } from './types';
+import { mergeConfig, defaultConfig } from './utils/config';
 import { injectDonateButton } from './utils/dom';
 
 export function me(walletAddress: string, configOptions?: ConfigOptions) {
+  // Ensure we have a wallet address
+  if (!walletAddress) {
+    console.error('No STX donation address exists.');
+    return;
+  }
+
   // Ensure the STX Me container exists on the DOM
-  const stxMeContainer = document.querySelector('#stx-me') as HTMLDivElement;
-  if (!stxMeContainer) {
+  const container = document.querySelector('#stx-me') as HTMLDivElement;
+  if (!container) {
     console.error('STX Me container not found.');
     return;
   }
 
-  const appConfig = new AppConfig(['store_write', 'publish_data']);
-  const defaultConfig: Config = {
-    showAddress: true,
-    appDetails: { name: 'STX Me', icon: '' },
-    buttonText: 'Send Me STX',
-    successMessage: 'Thanks for your donation!',
-    walletAddress,
-    network: process.env.NODE_ENV === 'production' ? 'mainnet' : 'testnet',
-    container: stxMeContainer,
-    userSession: new UserSession({ appConfig }),
-  };
-
-  const config = mergeConfig(defaultConfig, configOptions);
+  const config = mergeConfig({ ...defaultConfig, container }, configOptions);
 
   injectDonateButton(config);
 }

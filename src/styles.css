@@ -6,7 +6,7 @@
 
 #stx-me {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  max-width: 200px;
+  max-width: 240px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -54,4 +54,11 @@
 
 #stx-me .stx-me__transaction-link:hover {
   opacity: 75%;
+}
+
+#stx-me .stx-me__error {
+  font-size: 12px;
+  text-align: center;
+  color: red;
+  margin-bottom: 8px;
 }

@@ -1,5 +1,4 @@
-import { showConnect, FinishedTxData } from '@stacks/connect';
-import { openSTXTransfer } from '@stacks/connect';
+import { showConnect, FinishedTxData, openSTXTransfer } from '@stacks/connect';
 import { StacksMainnet, StacksTestnet } from '@stacks/network';
 
 import { Config } from '../types';
@@ -9,49 +8,17 @@ export function authenticate(config: Config) {
 
   showConnect({
     appDetails,
-    finished: () => injectDonateInput(config),
+    onFinish: () => injectDonateInput(config),
     userSession,
   });
 }
 
-export function handleDonationSuccess(
-  config: Config,
-  { txId }: FinishedTxData
-) {
-  const { container, network } = config;
-
-  if (!container) {
-    return;
-  }
-
-  // Clear the container
-  container.innerHTML = '';
-
-  const thankYouMessage = document.createElement('p');
-  thankYouMessage.classList.add('stx-me__thank-you');
-  thankYouMessage.innerText = config.successMessage;
-
-  const transactionLink = document.createElement('a');
-  transactionLink.classList.add('stx-me__transaction-link');
-  transactionLink.innerText = 'View your transaction';
-  transactionLink.href = `https://explorer.stacks.co/txid/${txId}?chain=${network}`;
-  transactionLink.target = '_blank';
-
-  container.appendChild(thankYouMessage);
-  container.appendChild(transactionLink);
-}
-
-export function handleDonation(config: Config) {
+export async function handleDonation(config: Config) {
   const { userSession, walletAddress, network } = config;
 
   // Make sure the user is authenticated
   if (!userSession.isUserSignedIn()) {
     authenticate(config);
-    return;
-  }
-
-  if (!walletAddress) {
-    console.error('No STX donation address exists.');
     return;
   }
 
@@ -72,21 +39,38 @@ export function handleDonation(config: Config) {
       network:
         network === 'mainnet' ? new StacksMainnet() : new StacksTestnet(),
       appDetails: config.appDetails,
-      onFinish: data => handleDonationSuccess(config, data),
+      onFinish: ({ txId }: FinishedTxData) =>
+        handleDonationSuccess(config, txId),
     });
   } catch (error) {
     handleDonationError(config, error);
   }
 }
 
+export function handleDonationSuccess(config: Config, txId: string) {
+  const { container, network } = config;
+
+  // Clear the container
+  container.innerHTML = '';
+
+  const thankYouMessage = document.createElement('p');
+  thankYouMessage.classList.add('stx-me__thank-you');
+  thankYouMessage.innerText = config.successMessage;
+
+  const transactionLink = document.createElement('a');
+  transactionLink.classList.add('stx-me__transaction-link');
+  transactionLink.innerText = 'View your transaction';
+  transactionLink.href = `https://explorer.stacks.co/txid/${txId}?chain=${network}`;
+  transactionLink.target = '_blank';
+
+  container.appendChild(thankYouMessage);
+  container.appendChild(transactionLink);
+}
+
 export function handleDonationError(config: Config, error: any) {
   const { container } = config;
 
   console.error(error);
-
-  if (!container) {
-    return;
-  }
 
   injectDonateButton(config);
 
@@ -98,17 +82,7 @@ export function handleDonationError(config: Config, error: any) {
 }
 
 export function injectDonateInput(config: Config) {
-  const { userSession, container } = config;
-
-  // Make sure the user is authenticated
-  if (!userSession.isUserSignedIn()) {
-    authenticate(config);
-    return;
-  }
-
-  if (!container) {
-    return;
-  }
+  const { container } = config;
 
   // Clear the container
   container.innerHTML = '';
@@ -130,11 +104,7 @@ export function injectDonateInput(config: Config) {
 }
 
 export function injectDonateButton(config: Config) {
-  const { container, buttonText } = config;
-
-  if (!container) {
-    return;
-  }
+  const { container, buttonText, userSession } = config;
 
   // Clear the container
   container.innerHTML = '';
@@ -143,6 +113,16 @@ export function injectDonateButton(config: Config) {
   donateButton.classList.add('stx-me__button');
   donateButton.innerHTML = buttonText;
 
+  function handleClick() {
+    // Make sure the user is authenticated
+    if (!userSession.isUserSignedIn()) {
+      authenticate(config);
+      return;
+    }
+
+    injectDonateInput(config);
+  }
+
   container.appendChild(donateButton);
-  donateButton.addEventListener('click', () => injectDonateInput(config));
+  donateButton.addEventListener('click', handleClick);
 }
