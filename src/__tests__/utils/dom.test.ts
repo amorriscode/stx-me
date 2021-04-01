@@ -2,9 +2,6 @@ import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
 import * as connect from '@stacks/connect';
 
-jest.mock('@stacks/connect');
-const mockedConnect = connect as jest.Mocked<typeof connect>;
-
 import { defaultConfig } from '../../utils/config';
 
 import {
@@ -15,6 +12,9 @@ import {
   handleDonationError,
   handleDonationSuccess,
 } from '../../utils/dom';
+
+jest.mock('@stacks/connect');
+const mockedConnect = connect as jest.Mocked<typeof connect>;
 
 beforeEach(() => {
   document.body.appendChild(defaultConfig.container);
