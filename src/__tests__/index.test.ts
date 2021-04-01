@@ -1,8 +1,11 @@
 import '@testing-library/jest-dom';
 
 import { defaultConfig } from '../utils/config';
-
+import * as domUtils from '../utils/dom';
 import { me } from '../index';
+
+jest.mock('../utils/dom');
+const mockedDomUtils = domUtils as jest.Mocked<typeof domUtils>;
 
 test('logs an error and stops execution if no wallet address provided', () => {
   console.error = jest.fn();
@@ -27,7 +30,16 @@ test('injects donate button upon initialization', () => {
 
   me('12345');
 
-  const donateButton = document.querySelector('.stx-me__button');
+  expect(mockedDomUtils.injectDonateButton).toHaveBeenCalled();
+});
 
-  expect(donateButton).toHaveTextContent(defaultConfig.buttonText);
+test('sets the passed wallet address in the config', () => {
+  const walletAddress = '12345';
+
+  me(walletAddress);
+
+  expect(mockedDomUtils.injectDonateButton).toHaveBeenCalledWith({
+    ...defaultConfig,
+    walletAddress,
+  });
 });

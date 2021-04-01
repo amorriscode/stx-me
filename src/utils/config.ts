@@ -11,7 +11,7 @@ export const defaultConfig: Config = {
   appDetails: { name: 'STX Me', icon: '' },
   buttonText: 'Send Me STX',
   successMessage: 'Thanks for your donation!',
-  walletAddress: '12345678910',
+  walletAddress: 'INVALID_WALLET_ADDRESS',
   network: 'testnet',
   container,
   userSession: new UserSession({ appConfig }),

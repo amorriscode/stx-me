@@ -16,7 +16,10 @@ export function me(walletAddress: string, configOptions?: ConfigOptions) {
     return;
   }
 
-  const config = mergeConfig({ ...defaultConfig, container }, configOptions);
+  const config = mergeConfig(
+    { ...defaultConfig, walletAddress, container },
+    configOptions
+  );
 
   injectDonateButton(config);
 }
