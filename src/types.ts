@@ -1,3 +1,5 @@
+import { UserSession } from '@stacks/connect';
+
 export interface AppDetails {
   name: string;
   icon: string;
@@ -15,4 +17,8 @@ export interface Config {
   appDetails: AppDetails;
   successMessage: string;
   buttonText: string;
+  walletAddress: string;
+  network: string;
+  container: HTMLDivElement;
+  userSession: UserSession;
 }
