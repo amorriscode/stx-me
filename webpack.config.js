@@ -1,11 +1,12 @@
 const path = require('path');
 const webpack = require('webpack');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: path.resolve(__dirname, './src/index.ts'),
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
+    filename: 'stx.me.js',
     library: {
       name: 'stx',
       type: 'var',
@@ -34,6 +35,14 @@ module.exports = {
   plugins: [
     new webpack.ProvidePlugin({
       Buffer: ['buffer', 'Buffer'],
+    }),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, './src/styles.css'),
+          to: path.resolve(__dirname, './dist/stx.me.css'),
+        },
+      ],
     }),
   ],
 };
