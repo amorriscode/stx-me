@@ -7,6 +7,7 @@ interface IObjectKeys {
 export interface AppDetails {
   name: string;
   icon: string;
+  redirectPath?: string;
 }
 
 export interface ConfigOptions {

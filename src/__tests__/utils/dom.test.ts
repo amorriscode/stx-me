@@ -81,6 +81,27 @@ test('clicking on donate confirmation button handles a donation', () => {
   defaultConfig.userSession.isUserSignedIn = () => false;
 });
 
+test('displays a wallet address if config is set', () => {
+  // Fake authenticated user
+  defaultConfig.userSession.isUserSignedIn = () => true;
+
+  // Show wallet address
+  defaultConfig.showAddress = true;
+
+  injectDonateInput(defaultConfig);
+
+  const walletAddress = document.querySelector(
+    '.stx-me__address'
+  ) as HTMLDivElement;
+
+  expect(walletAddress).toBeInTheDocument();
+  expect(walletAddress.innerText).toBe(defaultConfig.walletAddress);
+
+  // Reset default config
+  defaultConfig.userSession.isUserSignedIn = () => false;
+  defaultConfig.showAddress = false;
+});
+
 test('clicking on donate confirmation button prompts a user to authenticate', () => {
   injectDonateInput(defaultConfig);
 

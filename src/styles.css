@@ -62,3 +62,10 @@
   color: red;
   margin-bottom: 8px;
 }
+
+#stx-me .stx-me__address {
+  font-size: 12px;
+  margin-top: 8px;
+  color: var(--brand-color);
+  letter-spacing: 1px;
+}

@@ -101,6 +101,14 @@ export function injectDonateInput(config: Config) {
 
   container.appendChild(signTransactionButton);
   signTransactionButton.addEventListener('click', () => handleDonation(config));
+
+  if (config.showAddress) {
+    const donationAddress = document.createElement('div');
+    donationAddress.classList.add('stx-me__address');
+    donationAddress.innerText = config.walletAddress;
+
+    container.appendChild(donationAddress);
+  }
 }
 
 export function injectDonateButton(config: Config) {
