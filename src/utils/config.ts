@@ -6,9 +6,10 @@ const container = document.createElement('div');
 container.id = 'stx-me';
 
 const appConfig = new AppConfig(['store_write', 'publish_data']);
+
 export const defaultConfig: Config = {
   showAddress: true,
-  appDetails: { name: 'STX Me', icon: '' },
+  appDetails: { name: 'STX Me', icon: `${window.location.href}/favicon.ico` },
   buttonText: 'Send Me STX',
   successMessage: 'Thanks for your donation!',
   walletAddress: 'INVALID_WALLET_ADDRESS',
