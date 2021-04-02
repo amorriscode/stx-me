@@ -35,7 +35,7 @@ export async function handleDonation(config: Config) {
     openSTXTransfer({
       recipient: walletAddress,
       amount,
-      memo: 'STX Me Donation',
+      memo: 'stx.me Donation',
       network:
         network === 'mainnet' ? new StacksMainnet() : new StacksTestnet(),
       appDetails: config.appDetails,
