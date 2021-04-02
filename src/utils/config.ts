@@ -9,11 +9,14 @@ const appConfig = new AppConfig(['store_write', 'publish_data']);
 
 export const defaultConfig: Config = {
   showAddress: true,
-  appDetails: { name: 'STX Me', icon: `${window.location.href}/favicon.ico` },
+  appDetails: {
+    name: `${document.title}`,
+    icon: `${window.location.href}/favicon.ico`,
+  },
   buttonText: 'Send Me STX',
   successMessage: 'Thanks for your donation!',
   walletAddress: 'INVALID_WALLET_ADDRESS',
-  network: 'testnet',
+  network: process.env.NODE_ENV === 'production' ? 'mainnet' : 'testnet',
   container,
   userSession: new UserSession({ appConfig }),
 };
