@@ -70,3 +70,4 @@ Used to configure how the stx.me button behaves.
 | appDetails     | See AppDetails            | Configuration for the Stacks wallet pop ups.          |
 | successMessage | Thanks for your donation! | A message to display to users on successful donation. |
 | buttonText     | Send Me STX               | A message to display on the donation button.          |
+| network        | mainnet                   | The Stacks network transactions should be sent on.    |
