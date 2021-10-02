@@ -15,6 +15,7 @@ export interface ConfigOptions {
   appDetails?: AppDetails;
   successMessage?: string;
   buttonText?: string;
+  network?: string;
 }
 
 export interface Config extends IObjectKeys {

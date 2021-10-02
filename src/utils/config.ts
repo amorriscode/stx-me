@@ -16,7 +16,7 @@ export const defaultConfig: Config = {
   buttonText: 'Send Me STX',
   successMessage: 'Thanks for your donation!',
   walletAddress: 'INVALID_WALLET_ADDRESS',
-  network: process.env.NODE_ENV === 'production' ? 'mainnet' : 'testnet',
+  network: 'mainnet',
   container,
   userSession: new UserSession({ appConfig }),
 };
