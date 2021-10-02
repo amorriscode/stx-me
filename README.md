@@ -48,6 +48,7 @@ interface ConfigOptions {
   appDetails?: AppDetails;
   successMessage?: string;
   buttonText?: string;
+  network?: string;
 }
 ```
 
