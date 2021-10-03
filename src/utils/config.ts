@@ -11,7 +11,7 @@ export const defaultConfig: Config = {
   showAddress: false,
   appDetails: {
     name: `${document.title}`,
-    icon: `${window.location.hostname}/favicon.ico`,
+    icon: `${window.location.origin}/favicon.ico`,
   },
   buttonText: 'Send Me STX',
   successMessage: 'Thanks for your donation!',
